@@ -24,20 +24,22 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var mMap: GoogleMap
     var lat:Double = 0.0
     var status:String? = "no status"
-    var lng:Double = 0.0
-    var dis:Double = 0.0
+    var lng:Double = 1.0
+    var dis:Double = 1.0
     var etDis: String = "0.0"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_maps)
+
         val mapFragment = supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
-
 
         RunTimePermissions.verifyStoragePermissions(this)
 
         DistanceDetector.startService(this)
+
+
         btnCurrentLocation.setOnClickListener{
 
             etDis = etDistance.text.toString()
@@ -53,8 +55,6 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         distanceStatus.text = status
 
     }
-
-
 
 
 
