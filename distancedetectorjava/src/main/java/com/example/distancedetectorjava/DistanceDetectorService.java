@@ -88,7 +88,7 @@ public class DistanceDetectorService extends Service implements DistanceDetector
 //    }
 
     public void onDistanceChange(String status) {
-        //Toast.makeText(this, status, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, status, Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(LocationConstants.STATUS_BROADCAST_CHANNEL);
         // You can also include some extra data.
         intent.putExtra(INTENT_KEY_STATUS, status);

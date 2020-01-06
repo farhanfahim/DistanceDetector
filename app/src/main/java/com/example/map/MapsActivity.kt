@@ -12,7 +12,7 @@ import com.google.android.gms.maps.SupportMapFragment
 import kotlinx.android.synthetic.main.activity_maps.*
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.example.distancedectector.RunTimePermissions
-import com.example.distancedectector.*
+import com.example.distancedetectorjava.*
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.model.CircleOptions
 import com.google.android.gms.maps.model.LatLng

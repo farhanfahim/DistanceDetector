@@ -87,9 +87,9 @@ public class DistanceDetector {
 
             if (distance > userDistance){
                 distanceListener.onDistanceChange("out of distance");
-            }else{
-                //distanceListener.onDistanceChange("safe ");
-            }
+            }/*else{
+                distanceListener.onDistanceChange("safe ");
+            }*/
 
 
 
@@ -117,6 +117,20 @@ public class DistanceDetector {
         ContextCompat.startForegroundService(context, currentLocationService);
 
     }
+
+
+//    public static void startLocationService(Context context) {
+//        Intent currentLocationService = new Intent(context, CurrentLocationSendingService.class);
+//        ContextCompat.startForegroundService(context, currentLocationService);
+//
+//    }
+//
+//
+//    public static void startStatusService(Context context) {
+//        Intent distanceStatus = new Intent(context, DistanceDetectorService.class);
+//        ContextCompat.startForegroundService(context, distanceStatus);
+//
+//    }
 
     public static void stopService(){
         context.stopService(new Intent(context, CurrentLocationSendingService.class));
