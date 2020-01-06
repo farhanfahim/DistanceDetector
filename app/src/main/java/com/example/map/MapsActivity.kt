@@ -25,8 +25,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     var lat:Double = 0.0
     var status:String? = "no status"
     var lng:Double = 1.0
-    var dis:Double = 1.0
-    var etDis: String = "0.0"
+    var dis:Double = 20.0
+    var etDis: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,11 +39,16 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
         DistanceDetector.startService(this)
 
-
         btnCurrentLocation.setOnClickListener{
 
-            etDis = etDistance.text.toString()
-            DistanceDetector.setUserDistance(etDis.toDouble())
+            if(etDis.isEmpty()){
+                etDis = 20.0.toString()
+                DistanceDetector.setUserDistance(etDis.toDouble())
+            }else{
+                etDis = etDistance.text.toString()
+                DistanceDetector.setUserDistance(etDis.toDouble())
+            }
+
             lat = DistanceDetector.getLatitude()
             lng = DistanceDetector.getLongitude()
             dis = DistanceDetector.getUserDistance()
@@ -57,11 +62,13 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     }
 
 
-
     override fun onMapReady(googleMap: GoogleMap) {
-        mapLocation(googleMap,
-            DistanceDetector.getLatitude(),
-            DistanceDetector.getLongitude(),dis)
+
+            mapLocation(
+                googleMap,
+                DistanceDetector.getLatitude(),
+                DistanceDetector.getLongitude(), dis
+            )
     }
 
     private fun mapLocation(googleMap: GoogleMap,lat: Double,lng: Double, distance: Double){
@@ -98,10 +105,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         LocalBroadcastManager.getInstance(applicationContext).unregisterReceiver(dataReceiver)
     }
 
-
     private var dataReceiver: BroadcastReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) {
-
             status = intent.getStringExtra(LocationConstants.INTENT_KEY_STATUS)
         }
     }
