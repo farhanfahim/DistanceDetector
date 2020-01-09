@@ -10,12 +10,11 @@ import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import java.util.ArrayList
 
 class DistanceDetector(applicationContext: Context) {
-    companion object{
+    companion object {
         private var lat: Double = 0.0
-        private var lng:Double = 0.0
-        private var userDistance:Double = 0.0
-        var context: Context? = null
-
+        private var lng: Double = 0.0
+        private var userDistance: Double = 0.0
+        //private var context: Context? = null
 
 
         fun getLatitude(): Double {
@@ -39,14 +38,34 @@ class DistanceDetector(applicationContext: Context) {
             val distanceStatus = Intent(context, DistanceDetectorService::class.java)
             ContextCompat.startForegroundService(context, distanceStatus)
             ContextCompat.startForegroundService(context, currentLocationService)
+            registerStatusReceiver(context)
 
         }
 
-        fun stopService() {
-            if (context != null) {
-                context!!.stopService(Intent(context, CurrentLocationSendingService::class.java))
-                context!!.stopService(Intent(context, DistanceDetectorService::class.java))
+        fun stopService(context: Context) {
+            context.stopService(Intent(context, CurrentLocationSendingService::class.java))
+            context.stopService(Intent(context, DistanceDetectorService::class.java))
+            unregisterStatusReceiver(context)
+
+        }
+
+        private var statusReceiver: BroadcastReceiver = object : BroadcastReceiver() {
+            override fun onReceive(context: Context, intent: Intent) {
+                //status = intent.getStringExtra(LocationConstants.INTENT_KEY_STATUS)
             }
+        }
+
+        private fun registerStatusReceiver(context: Context) {
+            LocalBroadcastManager.getInstance(context).registerReceiver(
+                statusReceiver, IntentFilter(LocationConstants.LIVE_LOCATION_BROADCAST_CHANNEL)
+            )
+
+        }
+
+        private fun unregisterStatusReceiver(context: Context) {
+
+            LocalBroadcastManager.getInstance(context).unregisterReceiver(statusReceiver)
+
         }
     }
 
@@ -63,10 +82,10 @@ class DistanceDetector(applicationContext: Context) {
     }
 
 
-
     interface DistanceListener {
         //public void onDistanceChange(double lat, double lng, double distance, String status);
         fun onDistanceChange(status: String)
+
     }
 
 
@@ -111,19 +130,19 @@ class DistanceDetector(applicationContext: Context) {
             //            lng = locationModel.getcLng();
 
             if (distance > userDistance) {
-                distanceListener.onDistanceChange("danger $distance")
-            } else {
+                distanceListener.onDistanceChange("out of limit $distance")
+            }/* else {
                 distanceListener.onDistanceChange("safe $distance")
-            }
+            }*/
 
 
         }
     }
 
     fun registerLocationReceiver(context: Context) {
-            LocalBroadcastManager.getInstance(context).registerReceiver(
-                locationReceiver, IntentFilter(LocationConstants.LIVE_LOCATION_BROADCAST_CHANNEL)
-            )
+        LocalBroadcastManager.getInstance(context).registerReceiver(
+            locationReceiver, IntentFilter(LocationConstants.LIVE_LOCATION_BROADCAST_CHANNEL)
+        )
 
     }
 

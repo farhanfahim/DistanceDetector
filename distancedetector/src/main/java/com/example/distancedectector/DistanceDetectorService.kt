@@ -6,6 +6,7 @@ import android.app.PendingIntent
 import android.app.Service
 import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.os.Build
 import android.os.IBinder
 import android.widget.Toast
@@ -14,8 +15,7 @@ import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.example.distancedectector.LocationConstants.Companion.CHANNEL_ID
 import com.example.distancedectector.LocationConstants.Companion.INTENT_KEY_STATUS
 
-class DistanceDetectorService : Service(),DistanceDetector.DistanceListener {
-
+class DistanceDetectorService : Service(), DistanceDetector.DistanceListener {
 
 
     override fun onBind(intent: Intent?): IBinder? {
@@ -37,6 +37,7 @@ class DistanceDetectorService : Service(),DistanceDetector.DistanceListener {
         super.onDestroy()
         distanceDetector.unregisterLocationReceiver()
     }
+
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         startInForeground()
 
@@ -80,4 +81,6 @@ class DistanceDetectorService : Service(),DistanceDetector.DistanceListener {
 
         LocalBroadcastManager.getInstance(applicationContext).sendBroadcast(intent)
     }
+
+
 }

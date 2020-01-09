@@ -1,1 +1,1 @@
-include ':app', ':distancedectector', ':distancedetectorjava'
+include ':app', ':distancedetector', ':distancedetectorjava'

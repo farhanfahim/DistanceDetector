@@ -119,20 +119,20 @@ public class DistanceDetector {
     }
 
 
-//    public static void startLocationService(Context context) {
-//        Intent currentLocationService = new Intent(context, CurrentLocationSendingService.class);
-//        ContextCompat.startForegroundService(context, currentLocationService);
-//
-//    }
-//
-//
-//    public static void startStatusService(Context context) {
-//        Intent distanceStatus = new Intent(context, DistanceDetectorService.class);
-//        ContextCompat.startForegroundService(context, distanceStatus);
-//
-//    }
+    public static void startLocationService(Context context) {
+        Intent currentLocationService = new Intent(context, CurrentLocationSendingService.class);
+        ContextCompat.startForegroundService(context, currentLocationService);
 
-    public static void stopService(){
+    }
+
+
+    public static void startStatusService(Context context) {
+        Intent distanceStatus = new Intent(context, DistanceDetectorService.class);
+        ContextCompat.startForegroundService(context, distanceStatus);
+
+    }
+
+    public static void stopService(Context context){
         context.stopService(new Intent(context, CurrentLocationSendingService.class));
         context.stopService(new Intent(context, DistanceDetectorService.class));
     }
