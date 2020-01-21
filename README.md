@@ -6,11 +6,11 @@ Distance Detector is an android library written in kotlin - This library provide
 
 First you will have to add the library in your android projects. The library is available at jCenter and can be added by putting this line in your app’s build.gradle file.
 
-<img src='images/00.PNG'/>
+<img src='image/00.png' width=800 height= 200/>
 
 Add dependencies
 
-<img src='images/11.PNG'/>
+<img src='image/11.PNG'/>
 
 Add the permissions in your manifest file
 
