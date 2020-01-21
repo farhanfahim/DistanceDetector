@@ -22,7 +22,7 @@ Add these lines in your onCreate Method
 
 OPTIONAL METHODS IF YOU WANT TO GET LATITUDE & LONGITUDE 
 
-<img src='images/44.png'width=800 height= 90/>
+<img src='images/44.png' width=800 height= 90/>
 
 Final Step is stop the service in onDestroy method
 
