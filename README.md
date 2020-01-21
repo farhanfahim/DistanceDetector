@@ -6,28 +6,46 @@ Distance Detector is an android library written in kotlin - This library provide
 
 First you will have to add the library in your android projects. The library is available at jCenter and can be added by putting this line in your app’s build.gradle file.
 
-<img src='images/00.png' width=800 height= 100/>
+     allprojects {
+        repositories {
+            Maven{ url 'https://jitpack.io'}
+        }
+     }
 
 Add dependencies
 
-<img src='image/11.png' width=800 height= 60/>
+    dependencies {
+        implementation 'com.github.farhanfahi.mDistanceDetector:distanceDetector:1'
+     }
 
 Add the permissions in your manifest file
 
-<img src='images/22.png' width=800 height= 80/>
+       <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+       <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+       <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
 
 Add these lines in your onCreate Method
 
-<img src='images/33.png' width=800 height= 200/>
+      RunTimePermissions.verifyStoragePermissions(this)
+
+      DistanceDetector.startService(this)
+
+      DistanceDetector.setUserDistance(50)
+          
+
 
 OPTIONAL METHODS IF YOU WANT TO GET LATITUDE & LONGITUDE 
 
-<img src='images/44.png' width=800 height= 90/>
+      latitude = DistanceDetector.getLatitude()
+      longitude = DistanceDetector.getLongitude()
+      distance = DistanceDetector.getUserDistance()
 
 Final Step is stop the service in onDestroy method
 
-<img src='images/55.png' width=800 height= 100/>
-
+     override fun onDestroy() {
+        super.onDestroy()
+        DistanceDetector.stopService(this)
+    }
 Distance Detector works just like a Speedometer the difference is speedometer detect our speed, Distance detector detect your distance
 
 DistanceDetector will show your current location marker and draw a radius on map.
