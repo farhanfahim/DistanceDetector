@@ -10,23 +10,23 @@ First you will have to add the library in your android projects. The library is 
 
 Add dependencies
 
-<img src='image/11.PNG' width=800 height= 60/>
+<img src='image/11.png' width=800 height= 60/>
 
 Add the permissions in your manifest file
 
-<img src='images/22.PNG' width=800 height= 80/>
+<img src='images/22.png' width=800 height= 80/>
 
 Add these lines in your onCreate Method
 
-<img src='images/33.PNG'width=800 height= 200/>
+<img src='images/33.png' width=800 height= 200/>
 
 OPTIONAL METHODS IF YOU WANT TO GET LATITUDE & LONGITUDE 
 
-<img src='images/44.PNG'width=800 height= 90/>
+<img src='images/44.png'width=800 height= 90/>
 
 Final Step is stop the service in onDestroy method
 
-<img src='images/55.PNG'width=800 height= 100/>
+<img src='images/55.png' width=800 height= 100/>
 
 Distance Detector works just like a Speedometer the difference is speedometer detect our speed, Distance detector detect your distance
 
